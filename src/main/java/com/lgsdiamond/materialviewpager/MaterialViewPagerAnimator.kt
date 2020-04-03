@@ -26,7 +26,7 @@ import java.util.*
  */
 class MaterialViewPagerAnimator internal constructor(materialViewPager: MaterialViewPager) {
     //final toolbar layout elevation (if attr viewpager_enableToolbarElevation = true)
-    val elevation: Float
+    private val elevation: Float
 
     //max scroll which will be dispatched for all scrollable
     private val scrollMax: Float
@@ -48,11 +48,11 @@ class MaterialViewPagerAnimator internal constructor(materialViewPager: Material
     private var firstScrollValue = Float.MIN_VALUE
     private var justToolbarAnimated = false
 
-    //intial distance between pager & toolbat
+    //initial distance between pager & toolbar
     private var initialDistance = -1f
 
     //contains MaterialViewPager subviews references
-    private val mHeader: MaterialViewPagerHeader? = materialViewPager.materialViewPagerHeader
+    private val mHeader: MaterialViewPagerHeader = materialViewPager.materialViewPagerHeader
 
     //the tmp headerAnimator (not null if animating, else null)
     private var headerAnimator: ValueAnimator? = null

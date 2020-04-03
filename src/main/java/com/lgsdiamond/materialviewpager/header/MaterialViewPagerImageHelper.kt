@@ -63,18 +63,8 @@ object MaterialViewPagerImageHelper {
                             ): Boolean {
                                 //then fade to alpha=1
                                 object : Handler(Looper.getMainLooper()) {}.post {
-                                    fadeIn(
-                                        imageView,
-                                        alpha,
-                                        fadeDuration,
-                                        ViewPropertyAnimatorListenerAdapter()
-                                    )
-                                    if (imageLoadListener != null) {
-                                        imageLoadListener!!.onImageLoad(
-                                            imageView,
-                                            (imageView.drawable as BitmapDrawable).bitmap
-                                        )
-                                    }
+                                    fadeIn(imageView, alpha, fadeDuration, ViewPropertyAnimatorListenerAdapter())
+                                    imageLoadListener?.onImageLoad(imageView, (imageView.drawable as BitmapDrawable).bitmap)
                                 }
                                 return false
                             }
@@ -84,9 +74,9 @@ object MaterialViewPagerImageHelper {
             })
     }
 
-    fun fadeOut(view: View?, fadeDuration: Int, listener: ViewPropertyAnimatorListenerAdapter?) {
+    fun fadeOut(view: View, fadeDuration: Int, listener: ViewPropertyAnimatorListenerAdapter?) {
         //fade to alpha=0
-        ViewCompat.animate(view!!)
+        ViewCompat.animate(view)
             .alpha(0f)
             .setDuration(fadeDuration.toLong())
             .withLayer()
@@ -94,9 +84,14 @@ object MaterialViewPagerImageHelper {
             .setListener(listener)
     }
 
-    fun fadeIn(view: View?, alpha: Float, fadeDuration: Int, listener: ViewPropertyAnimatorListenerAdapter?) {
+    fun fadeIn(
+        view: View,
+        alpha: Float,
+        fadeDuration: Int,
+        listener: ViewPropertyAnimatorListenerAdapter?
+    ) {
         //fade to alpha=0
-        ViewCompat.animate(view!!)
+        ViewCompat.animate(view)
             .alpha(alpha)
             .setDuration(fadeDuration.toLong())
             .withLayer()
@@ -122,12 +117,7 @@ object MaterialViewPagerImageHelper {
                     imageView.setImageDrawable(drawable)
 
                     //then fade to alpha=1
-                    fadeIn(
-                        imageView,
-                        alpha,
-                        fadeDuration,
-                        ViewPropertyAnimatorListenerAdapter()
-                    )
+                    fadeIn(imageView, alpha, fadeDuration, ViewPropertyAnimatorListenerAdapter())
                 }
             })
     }

@@ -52,7 +52,12 @@ class MaterialViewPager : FrameLayout, OnPageChangeListener {
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(
+    constructor(
+        context: Context,
+        attrs: AttributeSet?,
+        defStyleAttr: Int,
+        defStyleRes: Int
+    ) : super(
         context,
         attrs,
         defStyleAttr,
@@ -65,7 +70,7 @@ class MaterialViewPager : FrameLayout, OnPageChangeListener {
     /**
      * Contains all references to MaterialViewPager's header views
      */
-    var materialViewPagerHeader: MaterialViewPagerHeader? = null
+    lateinit var materialViewPagerHeader: MaterialViewPagerHeader
 
     //the child toolbar
     var toolbar: Toolbar? = null
@@ -103,13 +108,11 @@ class MaterialViewPager : FrameLayout, OnPageChangeListener {
         val ss: MaterialViewPager.SavedState = state as MaterialViewPager.SavedState
         super.onRestoreInstanceState(ss.superState)
         settings = ss.settings!!
-        if (headerBackground != null) {
-            headerBackground!!.setBackgroundColor(settings.color)
-        }
+        headerBackground?.setBackgroundColor(settings.color)
         val animator = MaterialViewPagerHelper.getAnimator(this.context)
 
         //-1*ss.yOffset restore to 0
-        animator.restoreScroll(-1 * ss.yOffset, ss.settings)
+        animator?.restoreScroll(-1 * ss.yOffset, ss.settings)
         MaterialViewPagerHelper.register(context, animator)
     }
 
@@ -399,7 +402,7 @@ class MaterialViewPager : FrameLayout, OnPageChangeListener {
         var settings: MaterialViewPagerSettings? = null
         var yOffset = 0f
 
-        constructor(superState: Parcelable?) : super(superState) {}
+        constructor(superState: Parcelable?) : super(superState)
         private constructor(`in`: Parcel) : super(`in`) {
             settings = `in`.readParcelable(MaterialViewPagerSettings::class.java.classLoader)
             yOffset = `in`.readFloat()

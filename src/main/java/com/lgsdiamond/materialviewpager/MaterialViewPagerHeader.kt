@@ -70,7 +70,7 @@ class MaterialViewPagerHeader private constructor(var toolbar: Toolbar) {
         this.logo = logo
 
         //when logo get a height, initialise initial & final logo positions
-        toolbarLayout.viewTreeObserver.addOnPreDrawListener(object :
+        toolbarLayout?.viewTreeObserver?.addOnPreDrawListener(object :
             ViewTreeObserver.OnPreDrawListener {
             override fun onPreDraw(): Boolean {
                 //rotation fix, if not set, originalTitleY = Na
@@ -89,7 +89,7 @@ class MaterialViewPagerHeader private constructor(var toolbar: Toolbar) {
                 //(mLogo.getWidth()/2) *(1-finalScale) is the margin left added by the scale() on the logo
                 //when logo scale down, the content stay in center, so we have to annually remove the left padding
                 finalTitleX = Utils.dpToPx(52f, context) - logo.width / 2 * (1 - finalScale)
-                toolbarLayout.viewTreeObserver.removeOnPreDrawListener(this)
+                toolbarLayout?.viewTreeObserver?.removeOnPreDrawListener(this)
                 return false
             }
         })

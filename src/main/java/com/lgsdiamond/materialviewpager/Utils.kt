@@ -42,10 +42,10 @@ object Utils {
     }
 
     fun minMax(min: Float, value: Float, max: Float): Float {
-        var value = value
-        value = value.coerceAtMost(max)
-        value = min.coerceAtLeast(value)
-        return value
+        var aValue = value
+        aValue = aValue.coerceAtMost(max)
+        aValue = min.coerceAtLeast(aValue)
+        return aValue
     }
 
     /**

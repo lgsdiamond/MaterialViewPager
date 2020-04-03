@@ -14,8 +14,7 @@ import java.util.concurrent.ConcurrentHashMap
  * Or register a scrollable to the current activity's MaterialViewPagerAnimator
  */
 object MaterialViewPagerHelper {
-    private val hashMap =
-        ConcurrentHashMap<Any, MaterialViewPagerAnimator>()
+    private val hashMap = ConcurrentHashMap<Any, MaterialViewPagerAnimator>()
 
     /**
      * Register an MaterialViewPagerAnimator attached to an activity into the ConcurrentHashMap
@@ -70,6 +69,6 @@ object MaterialViewPagerHelper {
      * @return current MaterialViewPagerAnimator
      */
     fun getAnimator(context: Context): MaterialViewPagerAnimator {
-        return hashMap[context]!!       // TODO: Check null
+        return hashMap[context]!!
     }
 }
